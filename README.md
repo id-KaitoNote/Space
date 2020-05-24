@@ -11,8 +11,4 @@ https://id-kaitonote.github.io/Space/
 # Features
 
 ・パーティクルの作成
-・３ D モデルデータ(dae)の使用
-
-# Installation
-
-https://github.com/mrdoob/three.js/
+・3Dモデルデータ(dae)の使用
