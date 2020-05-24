@@ -16,23 +16,21 @@
   var size;
   var length;
   var material;
-  var randomColor;
   var mesh;
 
   //scene
   scene = new THREE.Scene();
 
-  //light
-  light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(200, 120, 30);
+  light = new THREE.DirectionalLight(0xffffff);
+  light.position.set(0, 0.5, 1);
+  light.scale.set(5, 5, 5);
   scene.add(light);
-
-  ambient = new THREE.AmbientLight(0x404040);
+  ambient = new THREE.AmbientLight(0x333333);
   scene.add(ambient);
 
   //camera
   camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-  camera.position.set(0, 200, 1300);
+  camera.position.set(0, 60, 200);
   camera.lookAt(scene.position);
 
   //renderer
@@ -60,13 +58,21 @@
 
   // model
   loader = new THREE.ColladaLoader();
-  loader.load("assets/model/dragon.dae", (collada) => {
+  loader.load("assets/model/logi.dae", (collada) => {
     model = collada.scene;
+    model.rotation.set(
+      (270 * Math.PI) / 180,
+      (360 * Math.PI) / 180,
+      (-90 * Math.PI) / 180
+    );
+    model.position.y = -3;
+    model.scale.set(3, 3, 3);
     scene.add(model);
   });
 
   //particle
-  geometry = new THREE.SphereGeometry(150, 200, 50);
+
+  geometry = new THREE.Geometry();
   size = 1500;
   length = 5000;
   for (let i = 0; i < length; i++) {
@@ -79,10 +85,9 @@
     );
   }
 
-  randomColor = Math.random() * 0xffffff;
   material = new THREE.PointsMaterial({
     size: 4,
-    color: randomColor,
+    color: 0xffffff,
   });
 
   mesh = new THREE.Points(geometry, material);
@@ -93,13 +98,13 @@
   controls.enableDamping = true;
   controls.dampingFactor = 0.2;
   controls.userRotate = true;
-  controls.autoRotate = true;
   controls.autoRotateSpeed = 12;
-  controls.minDistance = 100;
-  controls.maxDistance = 600;
+  controls.minDistance = 10;
+  controls.maxDistance = 20;
 
   function animation() {
     requestAnimationFrame(animation);
+    model.rotation.z += 0.01;
     controls.update();
     renderer.render(scene, camera);
   }
