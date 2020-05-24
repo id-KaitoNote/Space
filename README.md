@@ -6,7 +6,7 @@ Space
 
 https://id-kaitonote.github.io/Space/
 
-<img src="assets/img/Demo.png" alt="demo" title="demo">
+<img src="assets/img/demo.png" alt="demo" title="demo">
 
 # Features
 
